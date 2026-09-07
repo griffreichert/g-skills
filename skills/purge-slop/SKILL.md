@@ -40,6 +40,8 @@ Slop is code that adds no value: it survives deletion with nothing lost. Optimiz
   ```
 
   Keep the escape hatch where the type isn't knowable: untyped third-party returns, dynamic dispatch, a genuine `object` boundary. Name the reason in a comment on the same line, the way you would for a removed check.
+
+  Local variables don't get the same blanket rule. Add an annotation when a helper or factory call returns an unclear semantic type, or when an empty, nested, or branch-dependent collection needs its shape documented. Skip it when the right-hand side and name already make the type obvious. An annotation that only repeats what the right-hand side already says is slop; one that names a shape the right-hand side hides is a fact worth keeping.
 - **A name that needs a comment is the wrong name.** One that reads as "X but really Y" is worse, since the reader trusts it until it burns them. Rename the thing after what it holds.
 - **Read the library's API before you wrap it.** A helper that renames, unwraps, or forwards one native call is slop. Delete it and call the native operation directly.
 
